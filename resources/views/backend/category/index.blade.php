@@ -1,11 +1,12 @@
 @extends('layouts.backend')
 @section('styles')
-<link rel="stylesheet" href="{{'/assets/backend/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css'}}" />
+<link rel="stylesheet" href="{{asset('/assets/backend/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" />
 @endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
+        <div class="col">
         <div class="card">
             <div class="card-header bg-secondary">
                 Data Category
@@ -43,6 +44,7 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         </div>
     </div>

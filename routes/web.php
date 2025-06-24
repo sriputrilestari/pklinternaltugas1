@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\MyController;
@@ -8,40 +9,48 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.frontend');
 });
 
 
-//ROUTE BASIC
-Route::get('about', function () {
-    return 'ini Halaman About';
-});
+// //ROUTE BASIC
+// Route::get('about', function () {
+//     return 'ini Halaman About';
+// });
 
-Route::get('profile', function () {
-    return view('profile');
-});
+// Route::get('profile', function () {
+//     return view('profile');
+// });
 
-//ROUTE PARAMETER <ditandai dengan {}>
-Route::get('produk/{namaProduk}', function ($a) {
-    return 'saya membeli <b>' . $a . '</b>';
-});
+// //ROUTE PARAMETER <ditandai dengan {}>
+// Route::get('produk/{namaProduk}', function ($a) {
+//     return 'saya membeli <b>' . $a . '</b>';
+// });
 
-Route::get('beli/{barang}/{jumlah}', function ($a,$b) {
-    return view('beli', compact('a' , 'b'));
-});
+// Route::get('beli/{barang}/{jumlah}', function ($a,$b) {
+//     return view('beli', compact('a' , 'b'));
+// });
 
-//ROUTE OPTIONAL PARAMETER
-Route::get('kategori/{namaKategori?}', function ($nama = null) {
-    if($nama){
-        return 'anda memilih kategori:' .$nama;
-    }else {
-        return 'anda belum memilih kategori!';
-    }
-});
+// //ROUTE OPTIONAL PARAMETER
+// Route::get('kategori/{namaKategori?}', function ($nama = null) {
+//     if($nama){
+//         return 'anda memilih kategori:' .$nama;
+//     }else {
+//         return 'anda belum memilih kategori!';
+//     }
+// });
 
-Route::get('promo/{barang?}/{kode?}', function ($barang = null , $kode=null) {
-    return view('promo', compact('barang' , 'kode'));
-});
+// Route::get('promo/{barang?}/{kode?}', function ($barang = null , $kode=null) {
+//     return view('promo', compact('barang' , 'kode'));
+// });
+
+
+//route member/ guest (tamu)
+Route::get('/',[FrontendController::class,'index']);
+Route::get('/about',[FrontendController::class,'about']);
+Route::get('/product',[FrontendController::class,'product']);
+Route::get('/cart',[FrontendController::class,'cart']);
+
 
 
 
