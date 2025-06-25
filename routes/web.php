@@ -4,6 +4,8 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\CartController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\MyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
@@ -52,8 +54,6 @@ Route::get('/product',[FrontendController::class,'product']);
 Route::get('/cart',[FrontendController::class,'cart']);
 
 
-
-
 Route::get('siswa',[MyController::class,'index']);
 Route::get('siswa/create', [MyController::class, 'create']);
 Route::post('/siswa', [MyController::class, 'store']);
@@ -68,10 +68,28 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //import middlewere
 //route untuk admin / backend
-Route::group(['prefix' => 'admin' , 'middleware' => ['auth', Admin::class]], function () {
+Route::group(['prefix' => 'admin' , 'as' => 'backend.', 'middleware' => ['auth', Admin::class]], function () {
     Route::get('/', [BackendController::class,'index']);
     //crud
     Route::resource('/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
 });
 
+//Route guest (tamu) / member
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/product', [FrontendController::class,'product'])->name('product.index');
+Route::get('/product/{product}', [FrontendController::class,'singleProduct'])->name('product.show');
+Route::get('/product/category/{slug}',[FrontendController::class,'filterByCategory'])->name('product.filter');
+Route::get('/search',[FrontendController::class,'search'])->name('product.search');
+Route::get('/about',[FrontendController::class,'about']);
+
+//cart
+Route::get('/cart', [CartController::class,'index'])->name('cart.index');
+Route::get('/add-to-cart/{product}', [CartController::class,'addToCart'])->name('cart.add');
+Route::get('/cart/update/{id}', [CartController::class,'updateCart'])->name('cart.update');
+Route::get('/cart/{id}', [CartController::class,'remove'])->name('cart.remove');
+
+//orders
+Route::get('/checkout', [CartController::class,'checkout'])->name('cart.checkout');
+Route::get('/orders', [OrderController::class,'index'])->name('orders.index');
+Route::get('/orders/{id}', [OrderController::class,'show'])->name('orders.show');
