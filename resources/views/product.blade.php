@@ -1,18 +1,18 @@
 @extends('layouts.frontend')
 @section('content')
-<!-- shop_section_start -->
-<div class="shop_top_top_80">
+<!-- shop__section__start -->
+<div class="shop__top__top__80">
     <div class="container">
-        <div class="row grid_responsive">
+        <div class="row grid__responsive">
             <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
 
                 <div class="sidebar sidebar-collapse-hide">
-                    <div class="sidebar_widget widget-collapase-show">
-                        <div class="sidebar_title">
+                    <div class="sidebar__widget widget-collapase-show">
+                        <div class="sidebar__title">
                             <h4>Categories</h4>
                             <i class="fa fa-angle-down"></i>
                         </div>
-                        <div class="sidebar_menu">
+                        <div class="sidebar__menu">
                             <ul>
                                 <li>
                                     <a href="{{ route('product.index') }}"
@@ -37,9 +37,9 @@
             <div class="col-xl-9 col-lg-9 col-md-8 col-sm-12 col-12">
 
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade active show" id="projects_one" role="tabpanel"
-                         aria-labelledby="projects_one">
-                        <div class="row grid_responsive">
+                    <div class="tab-pane fade active show" id="projects__one" role="tabpanel"
+                         aria-labelledby="projects__one">
+                        <div class="row grid__responsive">
                             @if (isset($query))
                                 <h5 class="col-12">Hasil pencarian untuk: <strong>{{ $query }}</strong></h5>
                             @endif
@@ -48,24 +48,17 @@
                             @else
                                 @foreach ($product as $data)
                                     <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-6">
-                                        <div class="grid_wrapper">
-                                            <div class="grid_wrapper_img">
-                                                <div class="grid_wrapper_img_inner">
+                                        <div class="grid__wraper">
+                                            <div class="grid__wraper__img">
+                                                <div class="grid__wraper__img__inner">
                                                     <a href="{{ url('/product/' . $data->slug) }}">
-                                                        @php
-                                                            $image = $data->image && Storage::exists($data->image)
-                                                                ? Storage::url($data->image)
-                                                                : asset('assets/frontend/img/grid/grid_1.png');
-                                                            $secondaryImage = $data->image && Storage::exists($data->image)
-                                                                ? Storage::url($data->image)
-                                                                : asset('assets/frontend/img/grid/grid_1_2.png');
-                                                        @endphp
-                                                        <img class="primary_image" src="{{ $image }}" alt="{{ $data->name }}">
-                                                        <img class="secondary_image" src="{{ $secondaryImage }}"
+                                                        <img class="primary__image" src="{{Storage::url($data->image)}}" 
+                                                            alt="{{ $data->name }}">
+                                                        <img class="secondary__image" src="{{Storage::url($data->image)}}"
                                                              alt="{{ $data->name }}">
                                                     </a>
                                                 </div>
-                                                <div class="grid_wrapper_icon">
+                                                <div class="grid__wraper__icon">
                                                     <ul>
                                                         <li>
                                                             <a href="{{ route('cart.add', $data->id) }}"
@@ -82,15 +75,15 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="grid_wrapper_badge">
-                                                    <span class="sale_badge">New</span>
+                                                <div class="grid__wraper__badge">
+                                                    <span class="sale__badge">New</span>
                                                 </div>
                                             </div>
-                                            <div class="grid_wrapper_info">
-                                                <h3 class="grid_wrapper_title">
+                                            <div class="grid__wraper__info">
+                                                <h3 class="grid__wraper__title">
                                                     <a href="{{ url('/product/' . $data->slug) }}">{{ $data->name }}</a>
                                                 </h3>
-                                                <div class="grid_wrapper_price">
+                                                <div class="grid__wraper__price">
                                                     <span>Rp {{ number_format($data->price, 0, ',', '.') }}</span>
                                                 </div>
                                             </div>

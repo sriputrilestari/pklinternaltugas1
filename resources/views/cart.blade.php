@@ -1,4 +1,4 @@
-@extends('layouts.components-frontend.frontend')
+@extends('layouts.frontend')
 
 @section('content')
 <!-- breadcrumb-area -->
@@ -6,11 +6,11 @@
   <div class="container">
     <div class="row">
       <div class="col-xl-12">
-        <div class="breadcrumb_title">
+        <div class="breadcrumb__title">
           <h1>Cart</h1>
           <ul>
             <li><a href="{{ url('/') }}">Home</a></li>
-            <li class="color_blue">Cart</li>
+            <li class="color__blue">Cart</li>
           </ul>
         </div>
       </div>
@@ -19,11 +19,11 @@
 </div>
 <!-- breadcrumb-end -->
 
-<div class="cart-area sp_bottom_100 sp_top_100">
+<div class="cart-area sp__bottom__100 sp__top__100">
   <div class="container">
     <div class="row">
       <div class="col-xl-12">
-        <div class="cartarea_table_content table-responsive">
+        <div class="cartarea__table__content table-responsive">
           <table>
             <thead>
               <tr>
@@ -38,19 +38,19 @@
             <tbody>
               @forelse ($cartItems as $item)
               <tr>
-                <td class="cartarea_product_thumbnail">
+                <td class="cartarea__product__thumbnail">
                   <a href="#">
-                    <img src="{{ Storage::exists($item->product->image) ? Storage::url($item->product->image) : asset('assets/frontend/img/grid/grid_1.png') }}"
+                    <img src="{{Storage::url($item->product->image)}}" width="80"
                          alt="{{ $item->product->name }}" width="80">
                   </a>
                 </td>
-                <td class="cartarea_product_name">
+                <td class="cartarea__product__name">
                   <a href="#">{{ $item->product->name }}</a>
                 </td>
-                <td class="cartarea_product_price_cart">
+                <td class="cartarea__product__price__cart">
                   <span class="amount">Rp {{ number_format($item->product->price, 0, ',', '.') }}</span>
                 </td>
-                <td class="cartarea_product_quantity">
+                <td class="cartarea__product__quantity">
                   <form action="{{ route('cart.update', $item->id) }}" method="POST">
                     @csrf
                     @method('PUT')
@@ -61,10 +61,10 @@
                     </div>
                   </form>
                 </td>
-                <td class="cartarea_product_subtotal">
+                <td class="cartarea__product__subtotal">
                   Rp {{ number_format($item->product->price * $item->qty, 0, ',', '.') }}
                 </td>
-                <td class="cartarea_product_remove">
+                <td class="cartarea__product__remove">
                   <form action="{{ route('cart.remove', $item->id) }}" method="POST" onsubmit="return confirm('Hapus item ini dari keranjang?')">
                     @csrf
                     @method('DELETE')
@@ -95,9 +95,9 @@
     <!-- Continue Shopping -->
     <div class="row">
       <div class="col-lg-12">
-        <div class="cartarea_shipping_update_wrapper">
-          <div class="cartarea_shipping_update">
-            <a class="default_button" href="{{ route('cart.checkout') }}">Proceed to Checkout</a>
+        <div class="cartarea__shipping__update__wrapper">
+          <div class="cartarea__shipping__update">
+            <a class="default__button" href="{{ route('cart.checkout') }}">Proceed to Checkout</a>
           </div>
         </div>
       </div>

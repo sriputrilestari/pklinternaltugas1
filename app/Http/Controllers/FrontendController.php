@@ -26,6 +26,8 @@ class FrontendController extends Controller
         return view('product', compact('product', 'category'));
     }
 
+
+    //bisa mengatur semua data di $product
     public function singleProduct(Product $product)
     {
         return view('single_product', compact('product'));
@@ -36,8 +38,7 @@ class FrontendController extends Controller
         $category = Category::all();
         $selectedCategory = Category::where('slug', $slug)->firstOrFail();
         $product = Product::where('category_id', $selectedCategory->id)
-                          ->latest()
-                          ->get();
+                          ->latest()->get();
 
         return view('product', compact('product', 'category', 'selectedCategory'));
     }
