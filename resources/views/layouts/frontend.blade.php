@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/frontend/img/favicon.png')}}">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -19,33 +19,26 @@
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/futura-std-4">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
-
     @yield('styles')
-
 </head>
-
-
 <body>
 
-
-    <main class="main_wrapper body_overlay overflow_hidden">
+    <main class="main_wrapper body__overlay overflow__hidden">
 
         <!-- header section start -->
         @include('layouts.frontend.navbar')
         <!-- header section end -->
 
-        {{-- content --}}
+        <!-- content -->
         @yield('content')
-        {{-- content end --}}
-
-        <!-- footer_section_start -->
+        <!-- end content --
+ 
+        <! -- footer__section__start -->
         @include('layouts.frontend.footer')
-        <!-- footer_section_end -->
+        <!-- footer__section__end -->
 
-
-
-
-
+        <!-- modal__section__start -->
+        
     </main>
 
 
@@ -69,10 +62,9 @@
     <script src="{{ asset('assets/frontend/js/fontawesome.min.js') }} "></script>
     <script src="{{ asset('assets/frontend/js/plugins.js') }} "></script>
     <script src="{{ asset('assets/frontend/js/main.js') }} "></script>
+
     @stack('scripts')
     @include('sweetalert::alert')
     @yield('js')
     @stack('scripts')
 </body>
-
-</html>

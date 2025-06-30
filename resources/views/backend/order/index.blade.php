@@ -72,4 +72,4 @@
     <script>
         new DataTable('#dataOrder');
     </script>
-@endpush    
+@endpush

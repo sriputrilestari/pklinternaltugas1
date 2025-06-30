@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    //OrderController.php
+    // OrderController.php
     public function index()
     {
         $orders = Order::with('products')->where('user_id', auth()->id())->latest()->get();
@@ -16,7 +16,7 @@ class OrderController extends Controller
 
     public function show($id)
     {
-        $orders = Order::with('products')->where('user_id', auth()->id())->findOrFail($id);
+        $order = Order::with('products')->where('user_id', auth()->id())->findOrFail($id);
         return view('order_detail', compact('order'));
     }
-}
+}   

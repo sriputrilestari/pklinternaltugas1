@@ -4,13 +4,14 @@ use App\Http\Controllers\BackendController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\Orderontroller as OrdersController;
+use App\Http\Controllers\Backend\OrderController as OrdersController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\MyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('layouts.frontend');
@@ -48,6 +49,7 @@ use App\Http\Middleware\Admin;
 //     return view('promo', compact('barang' , 'kode'));
 // });
 
+auth::routes();
 
 //route member/ guest (tamu)
 Route::get('/',[FrontendController::class,'index']);
@@ -97,5 +99,5 @@ Route::group(['prefix' => 'admin' , 'as' => 'backend.', 'middleware' => ['auth',
     Route::resource('/category', CategoryController::class);
     Route::resource('/product', ProductController::class);
     Route::resource('/orders', OrdersController::class);
-    Route::put('/orders/{id}/status/', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
+    Route::put('/orders/{id}/status', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
 });

@@ -1,16 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
+
     public function index()
     {
         $cartItems = Cart::with('product')
@@ -22,7 +22,7 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             // Jika belum login, redirect dengan alert
             toast('Silakan login terlebih dahulu untuk menambahkan ke keranjang.', 'error');
             return redirect('/login');
@@ -45,11 +45,9 @@ class CartController extends Controller
                 'qty'        => $request->qty,
             ]);
         }
-
         toast('Produk berhasil ditambahkan ke keranjang.', 'success');
         return back();
     }
-
 
     public function updateCart(Request $request, $id)
     {
@@ -65,7 +63,6 @@ class CartController extends Controller
         toast('Jumlah berhasil diperbarui.', 'success');
         return redirect()->route('cart.index');
     }
-
     public function remove($id)
     {
         $cart = Cart::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
@@ -81,21 +78,19 @@ class CartController extends Controller
             toast('Keranjang kosong. Tidak bisa checkout.', 'warning');
             return redirect()->route('cart.index');
         }
-
         // Hitung total harga
         $total = $cartItems->sum(function ($item) {
             return $item->qty * $item->product->price;
         });
-
         // Simpan order
         $order = Order::create([
-            'user_id'    => auth()->id(),
-            'order_code' => 'ORD-' . strtoupper(Str::random(8)),
-            'total_price'=> $total,
-            'status'     => 'pending',
+            'user_id'     => auth()->id(),
+            'order_code'  => 'ORD-' . strtoupper(Str::random(8)),
+            'total_price' => $total,
+            'status'      => 'pending',
         ]);
 
-        // Simpan detail order ke pivot order_product
+        // Simpan detail order ke pivot `order_product`
         foreach ($cartItems as $item) {
             // Kurangi stok
             $product = Product::find($item->product_id);

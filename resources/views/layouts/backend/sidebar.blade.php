@@ -24,7 +24,7 @@
         <!-- ---------------------------------- -->
         <!-- Dashboard -->
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{url('admin/category')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('backend.category.index') }}" aria-expanded="false">
             <span>
               <i class="ti ti-cpu"></i>
             </span>
@@ -32,13 +32,22 @@
           </a>
         </li>
         <li class="sidebar-item">
-          <a class="sidebar-link" href="{{url('admin/product')}}" aria-expanded="false">
+          <a class="sidebar-link" href="{{ route('backend.product.index') }}" aria-expanded="false">
             <span>
               <i class="ti ti-activity-heartbeat"></i>
             </span>
             <span class="hide-menu">Product</span>
           </a>
         </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('backend.orders.index') }}" aria-expanded="false">
+            <span>
+              <i class="ti ti-activity-heartbeat"></i>
+            </span>
+            <span class="hide-menu">orders</span>
+          </a>
+        </li>
+        
         
       </nav>
 
